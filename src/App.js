@@ -1,6 +1,8 @@
 import { Component } from "react";
+import GlobalFonts from "./fonts/fonts";
 import Button from "./components/Button";
 import TimePanel from "./components/TimePanel";
+import styled from "styled-components";
 
 class App extends Component {
   state = {
@@ -34,6 +36,7 @@ class App extends Component {
 
       //! interval function
       this.intervalId = setInterval(() => {
+        console.log(this.state.miliseconds);
         if (!this.state.isPaused) {
           const { minutes, seconds, miliseconds } = this.state;
 
@@ -65,12 +68,12 @@ class App extends Component {
   handleStop = () => {
     this.handleStart();
 
-    clearInterval(this.intervalId);
     this.setState({
       isPaused: !this.state.isPaused,
       active: false,
       resetOn: true,
     });
+    clearInterval(this.intervalId);
   };
 
   handleReset = () => {
@@ -88,29 +91,67 @@ class App extends Component {
   render() {
     return (
       <>
-        <TimePanel
-          minutes={this.state.minutes}
-          seconds={this.state.seconds}
-          miliseconds={this.state.miliseconds}
-        />
-        <Button
-          text="Start"
-          activity={this.state.active}
-          click={this.handleStart}
-        />
-        <Button
-          text="Stop"
-          activity={!this.state.active}
-          click={this.handleStop}
-        />
-        <Button
-          text="Reset"
-          activity={!this.state.resetOn}
-          click={this.handleReset}
-        />
+        <GlobalFonts />
+        <Title>Stoper-Demo</Title>
+        <Wrapper>
+          <TimePanel
+            minutes={this.state.minutes}
+            seconds={this.state.seconds}
+            miliseconds={this.state.miliseconds}
+          />
+          <Flex>
+            <Button
+              text="Start"
+              activity={this.state.active}
+              click={this.handleStart}
+            />
+            <Button
+              text="Stop"
+              activity={!this.state.active}
+              click={this.handleStop}
+            />
+            <Button
+              text="Reset"
+              activity={!this.state.resetOn}
+              click={this.handleReset}
+            />
+          </Flex>
+        </Wrapper>
+        {/* <div>
+          Font made from{" "}
+          <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>is
+          licensed by CC BY 3.0
+        </div> */}
       </>
     );
   }
 }
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & button {
+    border-radius: 10px;
+    font-size: 24px;
+    height: 30%;
+    width: 250px;
+
+    margin-left: 20px;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  font-family: Veneer;
+`;
+
+const Title = styled.div`
+  width: 100%;
+  text-align: center;
+  margin: 0 0 10vh 0;
+  font-size: 36px;
+`;
 
 export default App;

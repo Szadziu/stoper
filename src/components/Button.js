@@ -1,8 +1,15 @@
+import styled from "styled-components";
+
 const Button = (props) => {
   return (
-    <button disabled={props.activity} onClick={props.click}>
+    <Btn disabled={props.activity} onClick={props.click}>
       {props.text}
-    </button>
+    </Btn>
   );
 };
+
+const Btn = styled.button`
+  /* background-color: red; */
+`;
+
 export default Button;
