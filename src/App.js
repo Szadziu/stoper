@@ -3,6 +3,8 @@ import GlobalFonts from "./fonts/fonts";
 import Button from "./components/Button";
 import TimePanel from "./components/TimePanel";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faStop, faUndo } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
   state = {
@@ -67,13 +69,13 @@ class App extends Component {
   };
   handleStop = () => {
     this.handleStart();
+    clearInterval(this.intervalId);
 
     this.setState({
       isPaused: !this.state.isPaused,
       active: false,
       resetOn: true,
     });
-    clearInterval(this.intervalId);
   };
 
   handleReset = () => {
@@ -101,16 +103,19 @@ class App extends Component {
           />
           <Flex>
             <Button
+              icon={<FontAwesomeIcon icon={faPlay} />}
               text="Start"
               activity={this.state.active}
               click={this.handleStart}
             />
             <Button
+              icon={<FontAwesomeIcon icon={faStop} />}
               text="Stop"
               activity={!this.state.active}
               click={this.handleStop}
             />
             <Button
+              icon={<FontAwesomeIcon icon={faUndo} />}
               text="Reset"
               activity={!this.state.resetOn}
               click={this.handleReset}
@@ -143,15 +148,24 @@ const Flex = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: #000;
+  border: 12px black solid;
+  border-left-width: 8px;
+  border-right-width: 8px;
+  width: 525px;
+  margin: 0 auto;
   justify-content: center;
-  font-family: Veneer;
+  /* font-family: Veneer; */
 `;
 
 const Title = styled.div`
   width: 100%;
   text-align: center;
-  margin: 0 0 10vh 0;
-  font-size: 36px;
+  margin: 5vh 0 20vh 0;
+  font-size: 46px;
+  font-family: Veneer;
 `;
 
 export default App;
