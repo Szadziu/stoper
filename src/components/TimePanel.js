@@ -10,13 +10,14 @@ const TimePanel = (props) => {
 };
 
 const Timer = styled.div`
-  padding-left: 8px;
   display: flex;
   align-items: center;
   height: 154px;
+
   background-color: #f5c801;
-  letter-spacing: 9px;
+  padding-left: 8px;
   border-radius: 10px;
+  letter-spacing: 9px;
 `;
 
 export default TimePanel;

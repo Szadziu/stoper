@@ -1,28 +1,29 @@
 import styled from "styled-components";
 
 const Button = (props) => {
+  const { activity, text, click, icon } = props;
   return (
-    <Btn
+    <ControlButton
       className={[
-        props.activity ? "isDisabled" : "",
-        props.text === "Start" ? "begin" : "",
+        activity ? "isDisabled" : "",
+        text === "Start" ? "beginning" : "",
       ]}
-      disabled={props.activity}
-      onClick={props.click}
+      disabled={activity}
+      onClick={click}
     >
-      {`${props.text} `}
-      {props.icon}
-    </Btn>
+      {`${text} `}
+      {icon}
+    </ControlButton>
   );
 };
 
-const Btn = styled.button`
+const ControlButton = styled.button`
   background-color: lightgray;
   &.isDisabled {
     pointer-events: none;
   }
 
-  &.begin:hover {
+  &.beginning:hover {
     background-color: rgb(255, 167, 65);
   }
 
