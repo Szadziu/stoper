@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const TimePanel = (props) => {
+  // Jak masz tylko 4 propy to może lepiej je destrukturyzować od razu przy deklaracji komponentu?
+  // jedna linia kodu mniej
   const { minutes, seconds, miliseconds } = props;
   return (
     <Timer>{` ${minutes <= 9 ? "0" : ""}${minutes}:${
