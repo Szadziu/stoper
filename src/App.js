@@ -27,12 +27,12 @@ class App extends Component {
       intervalId: setInterval(() => {
         const { miliseconds } = this.state;
         this.setState({
-          miliseconds: this.state.miliseconds + 1,
+          miliseconds: miliseconds + 1,
         });
-        if (miliseconds === 100) {
-          console.log("milisekundy są równe 100");
-          this.setState({ miliseconds: 0 });
-        }
+        // if (miliseconds === 100) {
+        //   console.log(miliseconds);
+        //   this.setState({ miliseconds: 0 });
+        // }
       }, 10),
     });
   };
