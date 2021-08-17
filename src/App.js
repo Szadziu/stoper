@@ -5,119 +5,82 @@ import TimePanel from "./components/TimePanel";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faStop, faUndo } from "@fortawesome/free-solid-svg-icons";
+import Title from "./components/Title";
 
 class App extends Component {
-  // Zastanawiam się, czy nie lepszym pomysłem jest trzymanie wewnątrz stanu tylko milisekund
-  // na ich podstawie możemy obliczać pozostałe wartości, a dzięki temu mamy mniej do ogarniania wewnątrz komponentu
-  // pamiętaj, że każda zmiana stanu powoduje rerender całego komponentu
   state = {
-    active: false,
     resetAvailable: false,
-    minutes: 0,
-    seconds: 0,
     miliseconds: 0,
+    intervalId: null,
   };
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+    this.setState({
+      intervalId: null,
+    });
+  }
 
   handleStart = () => {
     this.setState({
-      active: true,
       resetAvailable: true,
+      intervalId: setInterval(() => {
+        const { miliseconds } = this.state;
+        this.setState({
+          miliseconds: this.state.miliseconds + 1,
+        });
+        if (miliseconds === 100) {
+          console.log("milisekundy są równe 100");
+          this.setState({ miliseconds: 0 });
+        }
+      }, 10),
     });
-
-    // utrzymywanie wewnątrz stanu id interwału jest znacznie lepszym pomysłem
-    // w aktualnej wersji, dopóki nie przeczytam kodu komponentu, to nie mam pojęcia, że istnieje w ogóle taka
-    // właściwość, jak intervalId - dążymy do jak największej czytelności i przy okazji nie łamiemy zasady, że
-    // w stanie nie trzymamy wartości statycznych - ID interwału będzie się zmieniać po jego wyczyszczeniu
-    this.intervalId = setInterval(() => {
-      // kolejny plus przechowywania w stanie tylko milisekund - mniej do destrukturyzowania
-      const { minutes, seconds, miliseconds } = this.state;
-
-      // potencjalny rerender nr 1
-      // >= powoduje, że minuty zmieniają się w momencie pojawienia się liczby 59 (sekund), a powinny dopiero przy resecie sekund do 0 (60s - pełna minuta), nie?
-      if (seconds >= 59) {
-        this.setState({
-          minutes: minutes + 1,
-        });
-      }
-
-      // potencjalny rerender nr 2
-      // analogicznie, co przy minutach, tutaj różnica jest trudna do zauważenia gołym okiem, trzeba użyć narzędzi do debbugowania
-      if (miliseconds >= 99) {
-        this.setState({
-          seconds: seconds + 1,
-        });
-      }
-
-
-      // rerender nr 3
-      this.setState({
-        miliseconds: miliseconds + 1,
-      });
-
-      // potencjalny rerender nr 4
-      if (miliseconds === 99) this.setState({ miliseconds: 0 });
-
-      // potencjalny rerender nr 5
-      if (seconds === 59) this.setState({ seconds: 0 });
-
-      //! podsumowując - gdyby w stanie były tylko milisekund, komponent byłby rerenderowany raz na 10ms, teraz w najgorszym wypadku zostanie przerenderowany
-      //! 5 razy (co 10 ms), a w najlepszym raz. Duże usprawnienie wydajnościowe
-    }, 10);
   };
 
   handleStop = () => {
-    // gdyby ID interwału było przechowywane w stanie, to nie musielibyśmy mieć w ogóle wartości active
-    // w momencie kiedy interwał jest aktywny, jego ID (a tym samym właściwość w stanie) byłaby typem number - czyli truthy
-    // w momencie wyczyszczenie interwału, możemy też zmienić stan na np. null (falsy), a następnie opierać się na tej wartości
-    clearInterval(this.intervalId);
+    clearInterval(this.state.intervalId);
     this.setState({
-      active: false,
+      intervalId: null,
     });
+    console.log(this.state.intervalId);
   };
 
   handleReset = () => {
-    clearInterval(this.intervalId);
+    clearInterval(this.state.intervalId);
     this.setState({
-      active: false,
-      minutes: 0,
-      seconds: 0,
+      intervalId: null,
+    });
+    this.seconds = 0;
+    this.setState({
       miliseconds: 0,
       resetAvailable: false,
     });
   };
 
   render() {
-    // kolejny plus przechowywania w stanie tylko milisekund - mniej do destrukturyzowania
     const {
       handleStart,
       handleStop,
       handleReset,
-      state: { minutes, seconds, miliseconds, active, resetAvailable },
+      state: { miliseconds, resetAvailable, intervalId },
     } = this;
     return (
       <>
         <GlobalFonts />
-        {/* potencjał na osobny komponent - reużywalność zawsze na plus */}
-        <Title>Stoper-Demo</Title>
+        <Title text="Stoper-Demo" />
         <Wrapper>
-          {/* mniej propsów do przekazania, jeśli stan przechowuje tylko MS - komponent TimePanel mógłby sam wyliczać pozostałe wartości
-          dzięki temu logika zarządzania wyświetlanym czasem, nie jest przechowywana w App, a w komponencie, który faktycznie tego potrzebuje */}
-          <TimePanel
-            minutes={minutes}
-            seconds={seconds}
-            miliseconds={miliseconds}
-          />
+          <TimePanel miliseconds={miliseconds} />
           <Controls>
             <Button
               icon={<FontAwesomeIcon icon={faPlay} />}
               text="Start"
-              activity={active}
+              activity={intervalId}
               click={handleStart}
             />
             <Button
               icon={<FontAwesomeIcon icon={faStop} />}
               text="Stop"
-              activity={!active}
+              activity={!intervalId}
               click={handleStop}
             />
             <Button
@@ -138,14 +101,6 @@ class App extends Component {
   }
 }
 
-const Title = styled.div`
-  width: 100%;
-
-  margin: 5vh 0 20vh 0;
-  font-size: 46px;
-  font-family: Veneer;
-  text-align: center;
-`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
