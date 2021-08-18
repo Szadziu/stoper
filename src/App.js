@@ -29,10 +29,6 @@ class App extends Component {
         this.setState({
           miliseconds: miliseconds + 1,
         });
-        // if (miliseconds === 100) {
-        //   console.log(miliseconds);
-        //   this.setState({ miliseconds: 0 });
-        // }
       }, 10),
     });
   };
@@ -42,7 +38,6 @@ class App extends Component {
     this.setState({
       intervalId: null,
     });
-    console.log(this.state.intervalId);
   };
 
   handleReset = () => {
@@ -74,19 +69,19 @@ class App extends Component {
             <Button
               icon={<FontAwesomeIcon icon={faPlay} />}
               text="Start"
-              activity={intervalId}
+              disabled={intervalId}
               click={handleStart}
             />
             <Button
               icon={<FontAwesomeIcon icon={faStop} />}
               text="Stop"
-              activity={!intervalId}
+              disabled={!intervalId}
               click={handleStop}
             />
             <Button
               icon={<FontAwesomeIcon icon={faUndo} />}
               text="Reset"
-              activity={!resetAvailable}
+              disabled={!resetAvailable}
               click={handleReset}
             />
           </Controls>
