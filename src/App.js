@@ -10,51 +10,36 @@ import Title from "./components/Title";
 class App extends Component {
   state = {
     // nie można się oprzeć na intervalId?
+    //* nie do końca widzę sposób bez tworzenia osobnej właściwości
     resetAvailable: false,
     miliseconds: 0,
     intervalId: null,
   };
 
   componentWillUnmount() {
-    //! DRY
+    this.clearCurrentInterval();
+  }
+
+  clearCurrentInterval = () => {
     clearInterval(this.state.intervalId);
     this.setState({
       intervalId: null,
     });
-  }
+  };
 
   handleStart = () => {
-    //! może wystąpić niespójność stanu - przekaż funkcję zamiast obiektu
-    // dodatkowo, jeśli uzyjemy funkcji, to nie musimy destrukturyzować stanu
     this.setState({
       resetAvailable: true,
       intervalId: setInterval(() => {
-        const { miliseconds } = this.state;
-        this.setState({
-          miliseconds: miliseconds + 1,
-        });
+        this.setState((prevState) => ({
+          miliseconds: prevState.miliseconds + 1,
+        }));
       }, 10),
     });
   };
 
-  handleStop = () => {
-    //! DRY
-    clearInterval(this.state.intervalId);
-    this.setState({
-      intervalId: null,
-    });
-  };
-
   handleReset = () => {
-    //! DRY
-    clearInterval(this.state.intervalId);
-    this.setState({
-      intervalId: null,
-    });
-    //! ??
-    this.seconds = 0;
-
-    // dlaczego mamy tu dwa osobne setState?
+    this.clearCurrentInterval();
     this.setState({
       miliseconds: 0,
       resetAvailable: false,
@@ -64,7 +49,7 @@ class App extends Component {
   render() {
     const {
       handleStart,
-      handleStop,
+      clearCurrentInterval,
       handleReset,
       state: { miliseconds, resetAvailable, intervalId },
     } = this;
@@ -85,7 +70,7 @@ class App extends Component {
               icon={<FontAwesomeIcon icon={faStop} />}
               text="Stop"
               disabled={!intervalId}
-              click={handleStop}
+              click={clearCurrentInterval}
             />
             <Button
               icon={<FontAwesomeIcon icon={faUndo} />}
