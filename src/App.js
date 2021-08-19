@@ -9,12 +9,14 @@ import Title from "./components/Title";
 
 class App extends Component {
   state = {
+    // nie można się oprzeć na intervalId?
     resetAvailable: false,
     miliseconds: 0,
     intervalId: null,
   };
 
   componentWillUnmount() {
+    //! DRY
     clearInterval(this.state.intervalId);
     this.setState({
       intervalId: null,
@@ -22,6 +24,8 @@ class App extends Component {
   }
 
   handleStart = () => {
+    //! może wystąpić niespójność stanu - przekaż funkcję zamiast obiektu
+    // dodatkowo, jeśli uzyjemy funkcji, to nie musimy destrukturyzować stanu
     this.setState({
       resetAvailable: true,
       intervalId: setInterval(() => {
@@ -34,6 +38,7 @@ class App extends Component {
   };
 
   handleStop = () => {
+    //! DRY
     clearInterval(this.state.intervalId);
     this.setState({
       intervalId: null,
@@ -41,11 +46,15 @@ class App extends Component {
   };
 
   handleReset = () => {
+    //! DRY
     clearInterval(this.state.intervalId);
     this.setState({
       intervalId: null,
     });
+    //! ??
     this.seconds = 0;
+
+    // dlaczego mamy tu dwa osobne setState?
     this.setState({
       miliseconds: 0,
       resetAvailable: false,
