@@ -9,8 +9,6 @@ import Title from "./components/Title";
 
 class App extends Component {
   state = {
-    // nie można się oprzeć na intervalId?
-    //* nie do końca widzę sposób bez tworzenia osobnej właściwości
     resetAvailable: false,
     miliseconds: 0,
     intervalId: null,

@@ -2,21 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const TimePanel = ({ miliseconds }) => {
-  const seconds = Math.floor(miliseconds / 100);
-  const minutes = Math.floor(miliseconds / 6000);
+  const minutes = Math.floor(miliseconds / 100 / 60);
+  const seconds = Math.floor((miliseconds - minutes * 60 * 100) / 100);
+  const mili = Math.floor(miliseconds - minutes * 60 * 100 - seconds * 100);
 
   return (
-    <Timer>{`${minutes <= 9 ? "0" + minutes : minutes}:${
-      seconds >= 60
-        ? seconds % 60 <= 9
-          ? "0" + (seconds % 60)
-          : seconds % 60
-        : seconds <= 9
-        ? "0" + seconds
-        : seconds
-    }:${
-      miliseconds % 100 <= 9 ? "0" + (miliseconds % 100) : miliseconds % 100
-    }`}</Timer>
+    <Timer>
+      {minutes <= 9 ? "0" + minutes : minutes}:
+      {seconds <= 9 ? "0" + seconds : seconds}:{mili <= 9 ? "0" + mili : mili}
+    </Timer>
   );
 };
 
