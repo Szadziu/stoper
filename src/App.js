@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <>
         <GlobalFonts />
-        <Title text="Stoper-Demo" />
+        <Title text="Timer" />
         <Wrapper>
           <TimePanel miliseconds={miliseconds} />
           <Controls>
