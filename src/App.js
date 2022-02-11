@@ -1,11 +1,11 @@
-import { Component } from "react";
-import GlobalFonts from "./fonts/fonts";
-import Button from "./components/Button";
-import TimePanel from "./components/TimePanel";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faStop, faUndo } from "@fortawesome/free-solid-svg-icons";
-import Title from "./components/Title";
+import { Component } from 'react';
+import GlobalFonts from './fonts/fonts';
+import Button from './components/Button';
+import TimePanel from './components/TimePanel';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faStop, faUndo } from '@fortawesome/free-solid-svg-icons';
+import Title from './components/Title';
 
 class App extends Component {
   state = {
@@ -54,25 +54,25 @@ class App extends Component {
     return (
       <>
         <GlobalFonts />
-        <Title text="Timer" />
+        <Title text='Stopwatch' />
         <Wrapper>
           <TimePanel miliseconds={miliseconds} />
           <Controls>
             <Button
               icon={<FontAwesomeIcon icon={faPlay} />}
-              text="Start"
+              text='Start'
               disabled={intervalId}
               click={handleStart}
             />
             <Button
               icon={<FontAwesomeIcon icon={faStop} />}
-              text="Stop"
+              text='Stop'
               disabled={!intervalId}
               click={clearCurrentInterval}
             />
             <Button
               icon={<FontAwesomeIcon icon={faUndo} />}
-              text="Reset"
+              text='Reset'
               disabled={!resetAvailable}
               click={handleReset}
             />
@@ -90,31 +90,30 @@ class App extends Component {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  width: 525px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  height: 50vh;
 
-  padding: 5px;
+  /* padding: 5px; */
   margin: 0 auto;
 
   background-color: #000;
-  border: 12px black solid;
+  border: 12px red solid;
   border-left-width: 8px;
   border-right-width: 8px;
   border-radius: 20px;
 `;
 const Controls = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+
   justify-content: space-between;
 
-  & button {
-    width: 250px;
-    height: 30%;
+  width: 100%;
 
-    margin-left: 20px;
-    font-size: 24px;
-    border-radius: 10px;
-  }
+  background-color: coral;
 `;
 
 export default App;
