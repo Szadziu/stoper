@@ -1,4 +1,4 @@
-# Credit Calculator
+# Stopwatch
 
 ## Introduction
 
