@@ -1,11 +1,12 @@
 import { Component } from 'react';
-import GlobalFonts from './fonts/fonts';
-import Button from './components/Button';
-import TimePanel from './components/TimePanel';
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faUndo } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+
+import Button from './components/Button';
+import TimePanel from './components/TimePanel';
 import Title from './components/Title';
+import GlobalFonts from './fonts/fonts';
 
 class App extends Component {
   state = {
@@ -59,7 +60,12 @@ class App extends Component {
           <TimePanel miliseconds={miliseconds} />
           <Controls>
             <Button
-              icon={<FontAwesomeIcon icon={faPlay} />}
+              icon={
+                <FontAwesomeIcon
+                  icon={faPlay}
+                  color={intervalId || '#6B9430'}
+                />
+              }
               text='Start'
               disabled={intervalId}
               click={handleStart}
@@ -91,29 +97,39 @@ class App extends Component {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
+  align-items: center;
   width: 90%;
   height: 50vh;
-
-  /* padding: 5px; */
   margin: 0 auto;
-
-  background-color: #000;
-  border: 12px red solid;
+  border: 12px black solid;
   border-left-width: 8px;
   border-right-width: 8px;
   border-radius: 20px;
+
+  background-color: #000;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+  @media (min-width: 1366px) {
+    width: 60%;
+  }
+  @media (min-width: 3840px) {
+    width: 90%;
+  }
 `;
 const Controls = styled.div`
   display: flex;
-  /* flex-direction: column; */
-
-  justify-content: space-between;
-
+  justify-content: space-around;
   width: 100%;
 
-  background-color: coral;
+  @media (min-width: 768px) {
+    width: 70%;
+    height: 70%;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 export default App;

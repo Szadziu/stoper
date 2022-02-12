@@ -20,13 +20,23 @@ const Timer = styled.div`
   align-items: center;
   width: 90%;
   height: 150px;
+  border-radius: 10px;
 
   background-color: #f5c801;
 
-  /* padding-left: 8px; */
-  border-radius: 10px;
-
   letter-spacing: 9px;
+
+  @media (min-width: 768px) {
+    font-size: 4rem;
+    margin-left: 1rem;
+    height: 70%;
+  }
+  @media (min-width: 1920px) {
+    font-size: 5rem;
+  }
+  @media (min-width: 3840px) {
+    font-size: 8rem;
+  }
 `;
 
 export default TimePanel;

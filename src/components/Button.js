@@ -16,23 +16,39 @@ const Button = ({ disabled, text, click, icon }) => {
 
 const ControlButton = styled.button`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-
-  width: 60px;
+  width: 30%;
   padding: 0.5rem;
-  /* margin-left: 20px; */
-  font-size: 1rem;
   border-radius: 10px;
 
-  background-color: lightgray;
+  background-color: #bbb;
+
+  font-size: 1rem;
 
   pointer-events: ${({ active }) => (active ? 'none' : '')};
 
   &:hover {
     background-color: ${({ text }) =>
       text === 'Start' ? 'rgb(255, 167, 65)' : 'lightgray'};
+
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+    padding: 1rem;
+    width: 50%;
+  }
+  @media (min-width: 1366px) {
+    font-size: 1.8rem;
+  }
+  @media (min-width: 1920px) {
+    font-size: 2.2rem;
+  }
+  @media (min-width: 3840px) {
+    width: 60%;
+    font-size: 4rem;
   }
 `;
 
