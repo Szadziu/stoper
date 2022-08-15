@@ -10,11 +10,6 @@ The application presents classic stopwatch for measuring of time. It is availabl
 * styled components ver. 5.3.0
 * font awesome ver. 0.1.15
 
-* class and functional components mix
-* methods of lifecycle 
-* asynchronus intervals 
-* media queries
-
 ## Launch
 
 https://szadziu.github.io/stoper/
