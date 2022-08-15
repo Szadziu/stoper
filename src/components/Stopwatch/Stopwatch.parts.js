@@ -8,6 +8,12 @@ export const Container = styled.div`
     height: 100vh;
     max-width: 1600px;
     background-color: ${({ theme }) => theme.colors.primary};
+    margin: 0 auto;
+
+    @media (min-width: 1600px) {
+        border-left: 1px solid ${({ theme }) => theme.colors.black};
+        border-right: 1px solid ${({ theme }) => theme.colors.black};
+    }
 `;
 
 export const Wrapper = styled.div`
