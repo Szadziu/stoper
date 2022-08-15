@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/stoper/static/css/main.f2a8d75a.chunk.css",
-    "main.js": "/stoper/static/js/main.0b2070fa.chunk.js",
-    "main.js.map": "/stoper/static/js/main.0b2070fa.chunk.js.map",
+    "main.css": "/stoper/static/css/main.064c400e.chunk.css",
+    "main.js": "/stoper/static/js/main.08a42835.chunk.js",
+    "main.js.map": "/stoper/static/js/main.08a42835.chunk.js.map",
     "runtime-main.js": "/stoper/static/js/runtime-main.f78ed29b.js",
     "runtime-main.js.map": "/stoper/static/js/runtime-main.f78ed29b.js.map",
-    "static/js/2.3b60b26f.chunk.js": "/stoper/static/js/2.3b60b26f.chunk.js",
-    "static/js/2.3b60b26f.chunk.js.map": "/stoper/static/js/2.3b60b26f.chunk.js.map",
+    "static/js/2.84311969.chunk.js": "/stoper/static/js/2.84311969.chunk.js",
+    "static/js/2.84311969.chunk.js.map": "/stoper/static/js/2.84311969.chunk.js.map",
     "index.html": "/stoper/index.html",
-    "static/css/main.f2a8d75a.chunk.css.map": "/stoper/static/css/main.f2a8d75a.chunk.css.map",
-    "static/js/2.3b60b26f.chunk.js.LICENSE.txt": "/stoper/static/js/2.3b60b26f.chunk.js.LICENSE.txt",
+    "static/css/main.064c400e.chunk.css.map": "/stoper/static/css/main.064c400e.chunk.css.map",
+    "static/js/2.84311969.chunk.js.LICENSE.txt": "/stoper/static/js/2.84311969.chunk.js.LICENSE.txt",
     "static/media/Veneer.44006da8.woff2": "/stoper/static/media/Veneer.44006da8.woff2",
     "static/media/Veneer.600d1901.woff": "/stoper/static/media/Veneer.600d1901.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.f78ed29b.js",
-    "static/js/2.3b60b26f.chunk.js",
-    "static/css/main.f2a8d75a.chunk.css",
-    "static/js/main.0b2070fa.chunk.js"
+    "static/js/2.84311969.chunk.js",
+    "static/css/main.064c400e.chunk.css",
+    "static/js/main.08a42835.chunk.js"
   ]
 }
